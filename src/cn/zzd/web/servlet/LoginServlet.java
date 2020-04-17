@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			//登录成功
 			//存储数据
 			req.setAttribute("username",username);
-			req.getRequestDispatcher("/newsListServlet?username="+username).forward(req,resp);
+			req.getRequestDispatcher("/findNewsByPageServlet?username="+username).forward(req,resp);
 		}
 	}
 

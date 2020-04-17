@@ -37,8 +37,12 @@
 </head>
 <body>
 <div class="container">
-
-    <h7 style="text-align: left">欢迎 <font color="red"><%= request.getParameter("username")%></font>来到留言板,请文明发言</h7>
+<%
+    request.setCharacterEncoding("utf-8");
+%>
+    <h7 style="text-align: left">欢迎 <font color="red"><%= request.getParameter("username")%>
+    </font>来到留言板,请文明发言
+    </h7>
     <h3 style="text-align: center">留言板</h3>
     <table border="1" class="table table-bordered table-hover">
         <tr class="success">
@@ -47,20 +51,66 @@
             <th>内容</th>
 
         </tr>
-        <c:forEach items="${news}" var="ly" varStatus="s">
+        <c:forEach items="${pb.list}" var="ly" varStatus="s">
             <tr>
                 <td>${s.count}</td>
                 <td>${ly.username}</td>
                 <td>${ly.content}</td>
-                <td><a class="btn btn-default btn-sm" href="findNewsServlet?id=${ly.id}&username=<%= request.getParameter("username")%>">修改</a></td>
+                <td><a class="btn btn-default btn-sm"
+                       href="findNewsServlet?id=${ly.id}&username=<%= request.getParameter("username")%>">修改</a></td>
             </tr>
         </c:forEach>
 
 
         <tr>
-            <td colspan="8" align="center"><a class="btn btn-primary" href="add.jsp?username=<%=request.getParameter("username")%>">添加留言</a></td>
+            <td colspan="8" align="center"><a class="btn btn-primary"
+                                              href="add.jsp?username=<%=request.getParameter("username")%>">添加留言</a>
+            </td>
         </tr>
     </table>
 </div>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <c:if test="${pb.currentPage==1}">
+            <li class="disabled">
+                <a href="findNewsByPageServlet?currentPage=${pb.currentPage-1}&rows=5&username=<%=request.getParameter("username")%>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        </c:if>
+        <c:if test="${pb.currentPage!=1}">
+            <li><a href="findNewsByPageServlet?currentPage=${pb.currentPage-1}&rows=5&username=<%=request.getParameter("username")%>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a></li>
+        </c:if>
+
+        <c:forEach begin="1" end="${pb.totalPage}" var="i">
+
+            <c:if test="${i==pb.currentPage}">
+                <li class="active"><a href="findNewsByPageServlet?currentPage=${i}&rows=5&username=<%=request.getParameter("username")%>">${i}</a></li>
+            </c:if>
+            <c:if test="${i!=pb.currentPage}">
+                <li><a href="findNewsByPageServlet?currentPage=${i}&rows=5&username=<%=request.getParameter("username")%>">${i}</a></li>
+            </c:if>
+        </c:forEach>
+
+        <c:if test="${pb.currentPage==pb.totalPage}">
+        <li class="disabled"><a href="findNewsByPageServlet?currentPage=${pb.currentPage+1}&rows=5&username=<%=request.getParameter("username")%>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+        </li>
+    </c:if>
+        <c:if test="${pb.currentPage!=pb.totalPage}">
+            <li ><a href="findNewsByPageServlet?currentPage=${pb.currentPage+1}&rows=5&username=<%=request.getParameter("username")%>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+        </c:if>
+
+        <span style="font-size: 25px;margin-left: 5px ">
+            共${pb.totalCount}条记录，共${pb.totalPage}页
+        </span>
+    </ul>
+</nav>
 </body>
 </html>

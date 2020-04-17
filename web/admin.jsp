@@ -27,7 +27,7 @@
         }
     </script>
 
-    </script>
+    </head>
 </head>
 <body>
 <div class="container" style="width: 400px;">

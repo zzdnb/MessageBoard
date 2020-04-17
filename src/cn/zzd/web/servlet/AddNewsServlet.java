@@ -33,7 +33,7 @@ public class AddNewsServlet extends HttpServlet {
 		NewsService Service = new NewsServiceImpl();
 		Service.addNews(news);
 		System.out.println(username);
-		request.getRequestDispatcher( "/newsListServlet?username="+username).forward(request,response);
+		request.getRequestDispatcher( "/findNewsByPageServlet?username="+username).forward(request,response);
 
 	}
 

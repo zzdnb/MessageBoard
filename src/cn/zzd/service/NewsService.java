@@ -1,6 +1,7 @@
 package cn.zzd.service;
 
 import cn.zzd.domain.News;
+import cn.zzd.domain.PageBean;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface NewsService {
 	String findNews(int id);
 
 	void updateNews(News news);
+
+	PageBean<News> findNewsPage(String currentPage, String rows);
 }

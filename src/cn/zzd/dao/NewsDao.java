@@ -22,4 +22,8 @@ public interface NewsDao {
 	String findNews(int id);
 
 	void updateNews(News news);
+
+	int findTotalCount();
+
+	List<News> findByPage(int start, int rows);
 }

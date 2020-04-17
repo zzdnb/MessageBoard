@@ -30,7 +30,7 @@ public class UpdateNewsServlet extends HttpServlet {
 		news.setContent(content);
 		NewsService service = new NewsServiceImpl();
 		service.updateNews(news);
-		request.getRequestDispatcher( "/newsListServlet?username="+request.getParameter("username")).forward(request,response);
+		request.getRequestDispatcher( "/findNewsByPageServlet?username="+request.getParameter("username")).forward(request,response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
