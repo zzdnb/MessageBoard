@@ -33,6 +33,13 @@
             text-align: center;
         }
     </style>
+    <script>
+        function deleteNews(id) {
+            if (confirm("确定删除吗")) {
+                location.href = "delNewsServlet?id=" + id;
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -49,7 +56,7 @@
                 <td>${s.count}</td>
                 <td>${ly.username}</td>
                 <td>${ly.content}</td>
-                <td><a class="btn btn-default btn-sm" href="delNewsServlet?id=${ly.id}">删除</a></td>
+                <td><a class="btn btn-default btn-sm" href="javascript:deleteNews(${ly.id}) ">删除</a></td>
 
             </tr>
         </c:forEach>
